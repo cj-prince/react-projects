@@ -12,7 +12,6 @@ function App() {
           })}
         </section>
       <div>
-        <p></p>
       </div>
     </div>
 
