@@ -9,6 +9,14 @@ function App() {
   const [list, setList] = useState([]);
   const handleSubmit = (e) => {
     e.preventDefault();
+    try{
+      let colors = new Values(color).all(10)
+      setList(colors)
+    } catch (error) {
+      setError(true)
+      console.log(error)
+    }
+    
 
   } 
   return <>
@@ -16,12 +24,14 @@ function App() {
       <h3>color generator</h3>
       <form onSubmit={handleSubmit}>
         <input type="text" value={color}
-         onChange={(e) => setColor(e.target.value)} placeholder='#f15025' />
-         <button type='submit' >Submit</button>
+          onChange={(e) => setColor(e.target.value)} placeholder='#f15025' className={`${error ? 'error' : null}`} />
+        <button type='submit' className='btn' >Submit</button>
       </form>
     </section>
-    <section>
-      <p>list go here</p>
+    <section className='colors'>
+      {list.map((color,index)=> {
+        return <SingleColor key={index} {...color} index={index} hexColor={color.hex} />
+      })}
     </section>
   </>
 }
